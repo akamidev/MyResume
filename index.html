@@ -1004,15 +1004,19 @@
         
             <div class="col-md-12 text-center">
               <div class="loading" style="display: none;">Envoi en cours...</div>
-              <div class="error-message" style="display: none; background-color: #f8d7da; color: #842029; padding: 15px; border-radius: 8px; font-weight: 500;">
+            
+              <div id="errorMessage" class="error-message" style="display: none; background-color: #f8d7da; color: #842029; padding: 15px; border-radius: 8px; font-weight: 500;">
                 Une erreur est survenue. Veuillez réessayer ou nous contacter directement par email.
               </div>
             
-              <div class="sent-message" style="display: none; background-color: #38b16a; color: white; padding: 15px; border-radius: 8px; font-weight: 500;">
+              <div id="successMessage" class="sent-message" style="display: none; background-color: #38b16a; color: white; padding: 15px; border-radius: 8px; font-weight: 500;">
                 Votre message a bien été envoyé. Merci pour votre confiance. <br>
                 Nous traiterons votre demande dans les plus brefs délais.
               </div>
+            
               <button type="submit">Envoyer</button>
+            </div>
+            
             </div>
           </div>
         </form>
@@ -1077,19 +1081,34 @@
   document.getElementById("contact-form").addEventListener("submit", function(e) {
     e.preventDefault();
     const form = this;
-    form.querySelector('.loading').style.display = "block";
-    form.querySelector('.error-message').style.display = "none";
-    form.querySelector('.sent-message').style.display = "none";
+    const loading = form.querySelector('.loading');
+    const errorMessage = form.querySelector('.error-message');
+    const sentMessage = form.querySelector('.sent-message');
+
+    // Afficher le loader
+    loading.style.display = "block";
+    errorMessage.style.display = "none";
+    sentMessage.style.display = "none";
 
     emailjs.sendForm('service_n098g07', 'template_ajh3ofo', form)
       .then(function() {
-        form.querySelector('.loading').style.display = "none";
-        form.querySelector('.sent-message').style.display = "block";
+        loading.style.display = "none";
+        sentMessage.style.display = "block";
         form.reset();
+
+        // ❗ Masquer après 8 secondes
+        setTimeout(() => {
+          sentMessage.style.display = "none";
+        }, 8000);
       }, function(error) {
-        form.querySelector('.loading').style.display = "none";
-        form.querySelector('.error-message').style.display = "block";
+        loading.style.display = "none";
+        errorMessage.style.display = "block";
         console.error("EmailJS Error:", error);
+
+        // ❗ Masquer après 8 secondes
+        setTimeout(() => {
+          errorMessage.style.display = "none";
+        }, 3000);
       });
   });
 </script>
