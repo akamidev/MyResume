@@ -726,8 +726,16 @@
           </div>
 
           <div class="col-lg-8">
-            <form action="https://formspree.io/f/mzzrdkkk" method="POST" class="php-email-form" data-aos="fade-up" data-aos-delay="200">
-  <input type="hidden" name="_redirect" value="https://akamidev.github.io/MyResume/thanks.html">
+            <form 
+  action="https://formspree.io/f/mzzrdkkk" 
+  method="POST" 
+  class="php-email-form" 
+  data-aos="fade-up" 
+  data-aos-delay="200">
+
+  <!-- Redirection personnalisée -->
+  <input type="hidden" name="_next" value="https://akamidev.github.io/MyResume/thanks.html">
+  <input type="hidden" name="_subject" value="Nouveau message depuis le portfolio">
 
   <div class="row gy-4">
     <div class="col-md-6">
@@ -798,7 +806,6 @@
 
   <!-- Vendor JS Files -->
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
   <script src="assets/vendor/aos/aos.js"></script>
   <script src="assets/vendor/typed.js/typed.umd.js"></script>
   <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
